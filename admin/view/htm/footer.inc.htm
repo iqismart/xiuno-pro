@@ -1,0 +1,61 @@
+<!--{hook admin_footer_start.htm}-->
+
+<?php $db = G('db');?>
+<?php $time = G('time');?>
+<?php $ip = G('ip');?>
+<?php $useragent = G('useragent');?>
+<?php $starttime = G('starttime');?>
+<?php $forumlist = G('forumlist');?>
+<?php $forumarr = G('forumarr');?>
+<?php $fid = G('fid');?>
+<?php $conf = G('conf');?>
+<?php $static_version = $conf['static_version'];?>
+
+			<?php echo xn_debug_info();?>
+		</div>
+	</main>
+
+	<!--{hook admin_footer_footer_before.htm}-->
+	
+	<footer class="text-muted small bg-light py-4" id="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<!--{hook footer_footer_left_start.htm}-->
+					Powered by <b>Xiuno BBS <span><?php echo $conf['version'];?></span></b>
+					<!--{hook footer_footer_left_end.htm}-->
+				</div>
+				<div class="col text-right">
+					<!--{hook footer_footer_right_start.htm}-->
+					Time: <b><?php echo substr(microtime(1) - $starttime, 0, 5);?></b>, SQL: <b><?php echo count($db->sqls);?></b>
+					<!--{hook footer_footer_right_end.htm}-->
+				</div>
+			</div>
+		</div>
+	</footer>
+	
+	<!--{hook admin_footer_footer_after.htm}-->
+	
+	
+	<!--{hook admin_footer_js_before.htm}-->
+	
+	<script src="../lang/<?php echo $conf['lang'];?>/bbs.js"></script>
+	<script src="../view/js/jquery-3.5.1.min.js"></script>
+	<script src="../view/js/popper.min.js"></script>
+	<script src="../view/js/bootstrap.min.js"></script>
+	<script src="../view/js/xiuno.min.js"></script>
+	<script src="../view/js/bootstrap-plugin.min.js"></script>
+	<script src="../view/js/async.min.js"></script>
+	<script src="../view/js/form.js"></script>
+	<script>
+	var debug = DEBUG = <?php echo DEBUG; ?>;
+	var url_rewrite_on = <?php echo $conf['url_rewrite_on'];?>;
+	var fid = <?php echo $fid;?>;
+	</script>
+	
+	<!--{hook admin_footer_js_after.htm}-->
+	
+</body>
+</html>
+
+<!--{hook admin_footer_end.htm}-->
