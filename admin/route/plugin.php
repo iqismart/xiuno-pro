@@ -39,41 +39,68 @@ if($action == 'local') {
 	
 }elseif($action == 'updateVersion') { 
 	$step = param(2);
-	if(empty($step)) $step=1;
+	if(empty($step)) $step=0;
 
 	$iqisamrt_version = get_iqismart_version();
+    if ($step==0) {
+		if(version_compare($conf['version'],$iqisamrt_version['version'],'<')){ 
+			message(0, jump('点击进行下一步：下载压缩包', url('plugin-updateVersion-1'),100000));
+			exit();
+		}
+    }
 	//第一步 下载文件
 	if($step==1){
 		if(version_compare($conf['version'],$iqisamrt_version['version'],'<')){
-			//有新版本
+			//有新版本 
 			$url = $iqisamrt_version['url']; 
 			$s = http_get($url);
 			empty($s) AND message(-1, lang('plugin_return_data_error').lang('server_response_empty'));  
-			$zipfile = $conf['tmp_path'].'xiuno_'.$iqisamrt_version['version'].'.zip'; 
+			$zipfile = $conf['tmp_path'].'xiuno-pro-'.$iqisamrt_version['version'].'.zip'; 
+			if(file_exists($zipfile)){
+				header('Location:'.url('plugin-updateVersion-2'));
+				exit();
+			}
 			file_put_contents($zipfile, $s);  
-			$destpath = $conf['tmp_path'].'xiuno_'.$iqisamrt_version['version']; 
+			$destpath = $conf['tmp_path']; 
 			xn_unzip($zipfile, $destpath);
+			unlink($zipfile);
+			message(0, jump('点击进行下一步：文件比较', url('plugin-updateVersion-2'),100000));
 		}
 	}
 
 	//第二步 比较文件
     if ($step==2) {
-
+		message(0, jump('点击进行下一步：覆盖文件（请谨慎操作）', url('plugin-updateVersion-3'),100000)); 
     }
 
 	//第3部 确认更新
 	if($step==3){
 		if(version_compare($conf['version'],$iqisamrt_version['version'],'<')){ 
-			$srcpath = $conf['tmp_path'].'xiuno_'.$iqisamrt_version['version']; 
-			$destpath = './old'; 
-			xn_copy($srcpath,$destpath); 
-			rmdir_recusive($srcpath, 1);  
+			$srcpath = APP_PATH.'tmp/xiuno-pro-'.$iqisamrt_version['version']; 
+			if(!is_dir($srcpath)){
+				echo '$srcpath='.$srcpath;
+				header('Location:'.url('plugin-updateVersion-1'));
+				exit();
+			} 
+			$destpath = APP_PATH.'old';  
+			if(is_dir($srcpath)) {
+                dir_copy($srcpath, $destpath);
+                rmdir_recusive($conf['tmp_path'].'xiuno-pro-'.$iqisamrt_version['version'], 0);
+            }
+			message(0, jump('点击进行下一步：升级数据库', url('plugin-updateVersion-4'),100000)); 
 		}
-	}
-	 
-	include _include(ADMIN_PATH."view/htm/plugin_updateVersion.htm");
-	   
+	} 
 	
+	if($step==4){
+		if(version_compare($conf['version'],$iqisamrt_version['version'],'<')){ 
+			$sqlpath = APP_PATH.'install/upgrade.sql'; 
+			if(file_exists($sqlpath)){
+				$sql = file_get_contents($sqlpath);
+				if($sql) db_exec($sql);
+			} 
+			message(0, jump('恭喜，升级完成！', url('/'),100)); 
+		}
+	} 
 } elseif($action == 'official_fee' || $action == 'official_free') {
 
 	$cateid = param(2, 0);
