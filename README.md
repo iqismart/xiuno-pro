@@ -1,5 +1,5 @@
 # 介绍
-Xiuno PRO 是在消逝的官方git版本基础上，兼容php8；jquery、bootstrap版本升级。移除全部插件上线一起smart插件中心；修复了若干小bug。
+Xiuno PRO 是在官方git版本基础上，兼容php8；jquery、bootstrap版本升级；上线一起smart插件中心；修复了若干bug。
 
 ## 下载安装
 - 环境：php5.x-8.x、mysql5.x-8.x
