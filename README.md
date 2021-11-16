@@ -17,7 +17,6 @@ Xiuno PRO 是在官方git版本基础上，兼容php8；上线一起smart插件�
 ### 更新
 - 💄一起smart插件中心上线
 - 💥一键检查更新，在线升级
-- 支持开发者在一起smart上发布插件
 - 其他优化
  
 ## 使用
@@ -62,6 +61,9 @@ location ~* \.(htm)$ {
 
 在线安装：后台主页->插件->免费插件/收费插件
 离线安装：[一起smart插件中心：](https://www.iqismart.net/forum-4.htm)
+
+## 如何发布插件到插件中心
+- 前往社区 [一起smart](https://www.iqismart.net/forum-4.htm) 插件版块，发布插件即可
 
 ## 下一步
 - [ ] xiuno核心：增加手机号登录、企业支付等。 
