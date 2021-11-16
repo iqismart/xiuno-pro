@@ -1,5 +1,7 @@
 
-tmp
+upload
+tmp/*.php
+tmp/*.*
 log
 plugin/*
 conf/conf.php
