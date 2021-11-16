@@ -82,7 +82,7 @@ if($action == 'local') {
 				header('Location:'.url('plugin-updateVersion-1'));
 				exit();
 			} 
-			$destpath = APP_PATH.'old';  
+			$destpath = APP_PATH;  
 			if(is_dir($srcpath)) {
                 dir_copy($srcpath, $destpath);
                 rmdir_recusive($conf['tmp_path'].'xiuno-pro-'.$iqisamrt_version['version'], 0);
