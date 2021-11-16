@@ -37,6 +37,43 @@ if($action == 'local') {
 	}
 	exit(json_encode($iqisamrt_version));   
 	
+}elseif($action == 'updateVersion') { 
+	$step = param(2);
+	if(empty($step)) $step=1;
+
+	$iqisamrt_version = get_iqismart_version();
+	//第一步 下载文件
+	if($step==1){
+		if(version_compare($conf['version'],$iqisamrt_version['version'],'<')){
+			//有新版本
+			$url = $iqisamrt_version['url']; 
+			$s = http_get($url);
+			empty($s) AND message(-1, lang('plugin_return_data_error').lang('server_response_empty'));  
+			$zipfile = $conf['tmp_path'].'xiuno_'.$iqisamrt_version['version'].'.zip'; 
+			file_put_contents($zipfile, $s);  
+			$destpath = $conf['tmp_path'].'xiuno_'.$iqisamrt_version['version']; 
+			xn_unzip($zipfile, $destpath);
+		}
+	}
+
+	//第二步 比较文件
+    if ($step==2) {
+
+    }
+
+	//第3部 确认更新
+	if($step==3){
+		if(version_compare($conf['version'],$iqisamrt_version['version'],'<')){ 
+			$srcpath = $conf['tmp_path'].'xiuno_'.$iqisamrt_version['version']; 
+			$destpath = './old'; 
+			xn_copy($srcpath,$destpath); 
+			rmdir_recusive($srcpath, 1);  
+		}
+	}
+	 
+	include _include(ADMIN_PATH."view/htm/plugin_updateVersion.htm");
+	   
+	
 } elseif($action == 'official_fee' || $action == 'official_free') {
 
 	$cateid = param(2, 0);

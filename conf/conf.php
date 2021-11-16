@@ -103,7 +103,7 @@ return array (
   'cdn_on' => 0,
   'url_rewrite_on' => 0,
   'disabled_plugin' => 0,
-  'version' => '专业版',
+  'version' => '4.1.0',
   'static_version' => '?1.0',
   'installed' => 1,
 );
