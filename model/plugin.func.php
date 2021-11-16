@@ -8,7 +8,7 @@ $plugins = array(); // 跟官方插件合并
 // 官方插件列表
 $official_plugins = array();
 
-define('PLUGIN_OFFICIAL_URL', DEBUG == 4 ? 'http://plugin.x.com/' : 'http://plugin.xiuno.com/');
+define('PLUGIN_OFFICIAL_URL', DEBUG == 4 ? 'http://plugin.x.com/' : 'http://www.iqismart.net/');
 
 // todo: 对路径进行处理 include _include(APP_PATH.'view/htm/header.inc.htm');
 $g_include_slot_kv = array();
@@ -71,8 +71,8 @@ function plugin_init() {
 		}
 	}*/
 	
-//	$official_plugins = plugin_official_list_cache();
-//	empty($official_plugins) AND $official_plugins = array();
+	$official_plugins = plugin_official_list_cache();  
+	empty($official_plugins) AND $official_plugins = array();
 	
 	$plugin_paths = glob(APP_PATH.'plugin/*', GLOB_ONLYDIR);
 	if(is_array($plugin_paths)) {
@@ -415,14 +415,27 @@ function plugin_official_list($cond = array(), $orderby = array('pluginid'=>-1),
 	return $offlist;
 }
 
+function get_iqismart_userinfo(){
+	$url = PLUGIN_OFFICIAL_URL."plugin-userinfo.htm?api_key=".kv_get('iqismart_appkey');   
+	$s = http_get($url); 
+	// 检查返回值是否正确
+	if(!empty($s)) { 
+		$iqismart_userinfo = xn_json_decode($s); 
+		return $iqismart_userinfo;
+	} 
+
+}
+
 function plugin_official_list_cache() {
 	$s = DEBUG == 3 ? NULL : cache_get('plugin_official_list');
 	if($s === NULL) {
-		$url = PLUGIN_OFFICIAL_URL."plugin-all-4.htm"; // 获取所有的插件，匹配到3.0以上的。
+		$url = PLUGIN_OFFICIAL_URL."plugin-all-4.htm?api_key=".kv_get('iqismart_appkey'); // 获取所有的插件，匹配到3.0以上的。
 		$s = http_get($url);
-		
+		 
 		// 检查返回值是否正确
-		if(empty($s)) return xn_error(-1, '从官方获取插件数据失败。');
+		if(empty($s)) { 
+            return xn_error(-1, '从官方获取插件数据失败。');
+        }
 		$r = xn_json_decode($s);
 		if(empty($r)) return xn_error(-1, '从官方获取插件数据格式不对。');
 		
@@ -461,7 +474,7 @@ function plugin_read_by_dir($dir, $local_first = TRUE) {
 	!isset($local['hooks']) && $local['hooks'] = array();
 	!isset($local['hooks_rank']) && $local['hooks_rank'] = array();
 	!isset($local['dependencies']) && $local['dependencies'] = array();
-	!isset($local['icon_url']) && $local['icon_url'] = '';
+	//!isset($local['icon_url']) && $local['icon_url'] = '';
 	!isset($local['have_setting']) && $local['have_setting'] = 0;
 	!isset($local['setting_url']) && $local['setting_url'] = 0;
 	
@@ -488,6 +501,7 @@ function plugin_read_by_dir($dir, $local_first = TRUE) {
 	!isset($official['img4']) && $official['img4'] = 0;
 	!isset($official['brief_url']) && $official['brief_url'] = '';
 	!isset($official['qq']) && $official['qq'] = '';
+	!isset($official['buy']) && $official['buy'] = '';
 	
 	$local['official'] = $official;
 	
@@ -497,7 +511,7 @@ function plugin_read_by_dir($dir, $local_first = TRUE) {
 		$plugin = $official + $local;
 	}
 	// 额外的判断
-	$plugin['icon_url'] = $plugin['pluginid'] ? PLUGIN_OFFICIAL_URL."upload/plugin/$plugin[pluginid]/icon.png" : "../plugin/$dir/icon.png";
+	//$plugin['icon_url'] = $plugin['pluginid'] ? PLUGIN_OFFICIAL_URL."upload/plugin/$plugin[pluginid]/icon.png" : "../plugin/$dir/icon.png";
 	$plugin['setting_url'] = $plugin['installed'] && is_file("../plugin/$dir/setting.php") ? "plugin-setting-$dir.htm" : "";
 	$plugin['downloaded'] = isset($plugins[$dir]);
 	$plugin['stars_fmt'] = $plugin['pluginid'] ? str_repeat('<span class="icon star"></span>', $plugin['stars']) : '';

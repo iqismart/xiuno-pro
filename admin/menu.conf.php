@@ -49,6 +49,8 @@ return array(
 		'icon'=>'icon-cogs',
 		'tab'=> array (
 			'local'=>array('url'=>url('plugin-local'), 'text'=>lang('admin_plugin_local_list')),
+			'official_free'=>array('url'=>url('plugin-official_free'), 'text'=>'免费插件'),
+			'official_fee'=>array('url'=>url('plugin-official_fee'), 'text'=>'收费插件'),
 		)
 	)
 );

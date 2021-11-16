@@ -1,110 +1,191 @@
 <?php include _include(ADMIN_PATH.'view/htm/header.inc.htm');?>
 
 <div class="row">
-	<div class="col-12">
-		<div class="row">
-			<div class="col-md-4">
-				<div class="btn-group mb-3" role="group">
-					<?php echo admin_tab_active($menu['plugin']['tab'], $action);?>
-				</div>
-			</div>
-			<div class="col-md-8 text-right">
-				<div class="btn-group mb-3" role="group">
-					<?php echo $pugin_cate_html;?>
-				</div>
-			</div>
+    <div class="col-12">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="btn-group mb-3" role="group">
+                    <?php echo admin_tab_active($menu['plugin']['tab'], $action);?>
+                </div>
+            </div>
+            <div class="col-md-8 text-right">
+                <div class="btn-group mb-3" role="group">
+                    <?php echo $pugin_cate_html;?>
+                </div>
+            </div>
+        </div>
+        <?php if($action == 'official_fee' || $action == 'official_free'){?>
+			<?php
+					$sitename = urlencode($conf['sitename']); 
+					$sitedomain = urlencode($_SERVER['HTTP_HOST']); 
+					$redirect_url =  'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; 
+					$redirect_url = urlencode($redirect_url); 
+					$url = 'http://www.iqismart.net/plugin-bind.htm?sitename='.$sitename.'&sitedomain='.$sitedomain.'&redirect_url='.$redirect_url;  
+					?>
+        <?php if(empty(kv_get('iqismart_appkey'))){ ?>
 			
-		</div>
-		<div class="card">
-			<div class="card-body">
-				<div class="table-responsive">
-					<table class="table">
-						<?php foreach($pluginlist as $dir=>$plugin) { ?>
-											
-						<?php
+            <div class="alert alert-warning" role="alert">
+                要使用插件中心，请先绑定一起smart账号，<a target="_blank" href="<?php echo $url?>">立即前往绑定</a>
+            </div>
+            <?php }else{ ?>
+            <?php if(!empty($iqismart_userinfo)){ ?>
+            <div class="alert alert-success" role="alert">
+                <img style="height: 1.8rem;" src="//www.iqismart.net/view/img/logo.png" />
+                <svg t="1636961388725" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6329" width="25" height="25">
+				<path
+					d="M512 981.333333C252.8 981.333333 42.666667 771.2 42.666667 512S252.8 42.666667 512 42.666667s469.333333 210.133333 469.333333 469.333333-210.133333 469.333333-469.333333 469.333333z m-50.432-326.101333L310.613333 504.32a32 32 0 0 0-45.226666 45.226667l174.72 174.762666a32.341333 32.341333 0 0 0 0.341333 0.341334l0.256 0.213333a32 32 0 0 0 50.048-6.144l337.450667-379.605333a32 32 0 1 0-47.872-42.496l-318.762667 358.613333z"
+					fill="#52C41A" p-id="6330"></path>
+			</svg> ，当前绑定用户
+                <img class='avatar-2' src="<?php echo $iqismart_userinfo['avatar'];?>" />
+                <?php echo $iqismart_userinfo['username'];?>, <a style="color:gray" target="_blank" href="<?php echo $url?>">重新绑定</a>
+            </div>
+            <?php }else{ ?>
+            <div class="alert alert-error" role="alert">
+                <img style="height: 1.8rem;" src="//www.iqismart.net/view/img/logo.png" />
+                <svg t="1636961534059" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7354" width="25" height="25">
+				<path
+					d="M549.044706 512l166.189176-166.249412a26.383059 26.383059 0 0 0 0-36.98447 26.383059 26.383059 0 0 0-37.044706 0L512 475.015529l-166.249412-166.249411a26.383059 26.383059 0 0 0-36.98447 0 26.383059 26.383059 0 0 0 0 37.044706L475.015529 512l-166.249411 166.249412a26.383059 26.383059 0 0 0 0 36.98447 26.383059 26.383059 0 0 0 37.044706 0L512 548.984471l166.249412 166.249411a26.383059 26.383059 0 0 0 36.98447 0 26.383059 26.383059 0 0 0 0-37.044706L548.984471 512zM512 1024a512 512 0 1 1 0-1024 512 512 0 0 1 0 1024z"
+					fill="#E84335" p-id="7355"></path>
+			</svg> ，如需帮助请访问
+                <a target="_blank" href="//iqismart.net">一起smart</a>
+            </div>
+            <?php } ?>
+            <?php } ?>
+            <?php } ?>
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <?php foreach($pluginlist as $dir=>$plugin) { ?>
+
+                            <?php
 							$plugin['name'] = array_value($plugin, 'name');
 							$plugin['brief'] = array_value($plugin, 'brief');
 							$plugin['version_fmt'] = $action == 'local' ? $plugin['version'] : array_value($plugin, 'official_version');
 						?>
-	
-						<tr valign="top" dir="<?php echo $dir; ?>">
-							<td width="80" class="text-center">
-								<a href="<?php echo url("plugin-read-$dir");?>" target="_blank">
+
+                                <tr valign="top" dir="<?php echo $dir; ?>">
+                                    <td width="80" class="text-center">
+                                        <a href="<?php echo url("plugin-read-$dir");?>" target="_blank">
 									<img src="<?php echo $plugin['icon_url']; ?>" width="54" height="54" />
 								</a>
-								
-							</td>
-							<td width="300">
-								<a href="<?php echo url("plugin-read-$dir");?>"><b><?php echo $plugin['name']; ?> </b></a>
-								<span class="small">v<?php echo $plugin['version_fmt']; ?> </span>
-								<?php if($plugin['have_upgrade']) { ?>
-								<span class="small text-danger font-weight-bold">v<?php echo array_value($plugin, 'official_version'); ?> </span>
-								<?php } ?>
-	
-								<br /><span class="small text-muted"><?php echo $dir; ?></span>
-								
-								<?php if(!empty($plugin['username'])) { ?>
-								<br /><span class="small text-muted"><?php echo lang('author'); ?>：
-								<a href="http://bbs.xiuno.com/user-<?php echo $plugin['uid'];?>.htm" target="_blank"><?php echo $plugin['username'];?></span></a>
-								<?php } ?>
-							</td>
-							<td width="100">
-								<?php $price = $plugin['official']['price']; ?>
-								<span class="price" <?php echo $price == 0 ? 'style="color: #aaa"' : ''; ?>><?php echo $price; ?>元</span>
-							</td>
-							<td>
-								<p class="grey"><?php echo $plugin['brief']; ?></p>
-							</td>
-							<td width="250" align="right">
-							
-								<?php if($action == 'official_fee' && !$plugin['downloaded']) { ?>
-								<a role="button" class="btn btn-primary btn-sm buy" href="<?php echo url("plugin-read-$dir"); ?>"><?php echo lang('buy');?></a>
-								<?php } ?>
-	
-								<?php if($action == 'official_free' && !$plugin['downloaded']) { ?>
-								<a role="button" class="btn btn-primary btn-sm download" href="<?php echo url("plugin-download-$dir"); ?>"><?php echo lang('download');?></a>
-								<?php } ?>
-								
-								<?php if($plugin['setting_url']) { ?>
-								<a role="button" class="btn btn-primary btn-sm setting" href="<?php echo url("plugin-setting-$dir"); ?>"><?php echo lang('setting');?></a>
-								<?php } ?>
-								
-								<?php if(!$plugin['installed'] && $plugin['downloaded']) { ?>
-								<a role="button" class="btn btn-primary btn-sm install" href="<?php echo url("plugin-install-$dir"); ?>"><?php echo lang('install');?></a>
-								<?php } ?>
-								
-								<?php if($plugin['installed'] && $plugin['enable']) { ?>
-								<a role="button" class="btn btn-secondary btn-sm disable" href="<?php echo url("plugin-disable-$dir"); ?>"><?php echo lang('disable');?></a>
-								<?php } ?>
-								
-								<?php if($plugin['installed'] && !$plugin['enable']) { ?>
-								<a role="button" class="btn btn-secondary btn-sm enable" href="<?php echo url("plugin-enable-$dir"); ?>"><?php echo lang('enable');?></a>
-								<?php } ?>
-								
-								<?php if($plugin['installed']) { ?>
-								<a role="button" class="btn btn-danger btn-sm unstall confirm" data-confirm-text="<?php echo lang('plugin_unstall_confirm_tips', array('name'=>$plugin['name']));?>" href="<?php echo url("plugin-unstall-$dir"); ?>"><?php echo lang('unstall');?></a>
-								<?php } ?>
-								
-								<?php if($plugin['have_upgrade']) { ?>
-								<a role="button" class="btn btn-primary btn-sm upgrade" href="<?php echo url("plugin-upgrade-$dir"); ?>"><?php echo lang('update');?></a>
-								<?php } ?>
-								
-							</td>
-						</tr>
-						<?php } ?>
-					</table>
-				</div>
-			</div>
-		</div>
-		
-		<?php if($pagination) { ?> <nav><ul class="pagination justify-content-center"><?php echo $pagination; ?></ul></nav> <?php } ?>
-		
-	</div>
-	
+
+                                    </td>
+                                    <td width="300">
+                                        <a href="<?php echo url("plugin-read-$dir");?>"><b>
+										<?php echo $plugin['name']; ?>
+									</b></a>
+                                        <span class="small">v
+									<?php echo $plugin['version_fmt']; ?>
+								</span>
+                                        <?php if($plugin['have_upgrade']) { ?>
+                                        <span class="small text-danger font-weight-bold">v
+									<?php echo array_value($plugin, 'official_version'); ?>
+								</span>
+                                        <?php } ?>
+
+                                        <br /><span class="small text-muted">
+									<?php echo $dir; ?>
+								</span>
+
+                                        <?php if(!empty($plugin['username'])) { ?>
+                                        <br /><span class="small text-muted">
+									<?php echo lang('author'); ?>：
+									<a href="http://www.iqismart.net/user-<?php echo $plugin['uid'];?>.htm"
+										target="_blank">
+										<?php echo $plugin['username'];?>
+								</span></a>
+                                        <?php } ?>
+                                    </td>
+                                    <td width="100">
+                                        <?php $price = $plugin['official']['price']; ?>
+                                        <span class="price" <?php echo $price==0 ? 'style="color: #aaa"' : '' ; ?>>
+									<?php echo $price; ?>元
+								</span>
+                                    </td>
+                                    <td>
+                                        <p class="grey">
+                                            <?php echo $plugin['brief']; ?>
+                                        </p>
+                                    </td>
+                                    <td width="250" align="right">
+
+                                        <?php if($action == 'official_fee' && !$plugin['downloaded'] &&  $plugin['buy']==0) { ?>
+                                        <a role="button" class="btn btn-primary btn-sm buy" href="<?php echo url("plugin-read-$dir"); ?>">
+                                            <?php echo lang('buy');?>
+                                        </a>
+                                        <?php } ?>
+										
+										<?php if($action == 'official_fee' && !$plugin['downloaded']  && $plugin['buy']==1) { ?>
+                                        <a role="button" class="btn btn-primary btn-sm buy" href="<?php echo url("plugin-read-$dir"); ?>">
+                                            <?php echo lang('download');?>
+                                        </a>
+                                        <?php } ?>
+
+                                        <?php if($action == 'official_free' && !$plugin['downloaded']) { ?>
+                                        <a role="button" class="btn btn-primary btn-sm download" href="<?php echo url("plugin-download-$dir"); ?>">
+                                            <?php echo lang('download');?>
+                                        </a>
+                                        <?php } ?>
+
+                                        <?php if($plugin['setting_url']) { ?>
+                                        <a role="button" class="btn btn-primary btn-sm setting" href="<?php echo url("plugin-setting-$dir"); ?>">
+                                            <?php echo lang('setting');?>
+                                        </a>
+                                        <?php } ?>
+
+                                        <?php if(!$plugin['installed'] && $plugin['downloaded']) { ?>
+                                        <a role="button" class="btn btn-primary btn-sm install" href="<?php echo url("plugin-install-$dir"); ?>">
+                                            <?php echo lang('install');?>
+                                        </a>
+                                        <?php } ?>
+
+                                        <?php if($plugin['installed'] && $plugin['enable']) { ?>
+                                        <a role="button" class="btn btn-secondary btn-sm disable" href="<?php echo url("plugin-disable-$dir"); ?>">
+                                            <?php echo lang('disable');?>
+                                        </a>
+                                        <?php } ?>
+
+                                        <?php if($plugin['installed'] && !$plugin['enable']) { ?>
+                                        <a role="button" class="btn btn-secondary btn-sm enable" href="<?php echo url("plugin-enable-$dir"); ?>">
+                                            <?php echo lang('enable');?>
+                                        </a>
+                                        <?php } ?>
+
+                                        <?php if($plugin['installed']) { ?>
+                                        <a role="button" class="btn btn-danger btn-sm unstall confirm" data-confirm-text="<?php echo lang('plugin_unstall_confirm_tips', array('name'=>$plugin['name']));?>" href="<?php echo url("plugin-unstall-$dir"); ?>">
+                                            <?php echo lang('unstall');?>
+                                        </a>
+                                        <?php } ?>
+
+                                        <?php if($plugin['have_upgrade']) { ?>
+                                        <a role="button" class="btn btn-primary btn-sm upgrade" href="<?php echo url("plugin-upgrade-$dir"); ?>">
+                                            <?php echo lang('update');?>
+                                        </a>
+                                        <?php } ?>
+
+                                    </td>
+                                </tr>
+                                <?php } ?>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <?php if($pagination) { ?>
+            <nav>
+                <ul class="pagination justify-content-center">
+                    <?php echo $pagination; ?>
+                </ul>
+            </nav>
+            <?php } ?>
+
+    </div>
+
 </div>
 
 <?php include _include(ADMIN_PATH.'view/htm/footer.inc.htm');?>
 
 <script>
-$('#nav li.nav-item-plugin').addClass('active');
+    $('#nav li.nav-item-plugin').addClass('active');
 </script>

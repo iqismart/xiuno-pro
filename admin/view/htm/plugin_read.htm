@@ -9,6 +9,7 @@
 		<div class="card">
 			<div class="card-body">
 				<div class="media">
+					 
 					<div>
 						<img src="<?php echo $plugin['icon_url']; ?>" width="54" height="54" class="mr-3" />
 					</div>
@@ -33,6 +34,13 @@
 					<div class="col-md-6">
 						<span class="text-muted"><?php echo lang('price');?></span>：
 						<span class="price"><?php echo $plugin['official']['price']; ?>元</span>
+						<?php if($plugin['official']['price'] > 0){?>
+							<?php if($plugin['buy']== 0){?>
+							<a style="color:red" target="_blank" href="<?php echo $plugin['brief_url'].'?api_key='.kv_get('iqismart_appkey'); ?>">购买</a>
+							<?php }else{  ?>
+								<a style="color:gray"  >已购买</a>
+							<?php }  ?>
+						<?php }  ?>
 					</div>
 					
 					<div class="col-md-6">
@@ -78,6 +86,11 @@
 					<?php echo $errmsg; ?>
 				</div>
 				<?php } ?>
+				<?php if($plugin['official']['price'] > 0){?>
+					<div class="alert alert-primary">
+	 					温馨提示：点击购买，前往主题页->赞助购买->更新缓存->刷新页面, 即可出现下载按钮！
+					</div>
+				<?php }  ?>
 				
 				<?php if(!empty($plugin['pluginid']) && !empty($url)) { ?>
 				<div class="row">

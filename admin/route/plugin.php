@@ -48,12 +48,25 @@ if($action == 'local') {
 	
 	$header['title']    = lang('official_plugin');
 	$header['mobile_title'] = lang('official_plugin');
+
+	//绑定站点回调
+	$iqismart_appid=$_GET['iqismart_appid'];
+	$iqismart_appkey=$_GET['iqismart_appkey']; 
+	if(!empty($iqismart_appkey)){
+		kv_set('iqismart_appid',$iqismart_appid); 
+		kv_set('iqismart_appkey',$iqismart_appkey); 
+	} 
+
+	if(kv_get('iqismart_appkey')){
+		//已绑定 获取信息 
+		$iqismart_userinfo = get_iqismart_userinfo(); 
+	}
 	
 	include _include(ADMIN_PATH."view/htm/plugin_list.htm");
 	
 // 给出二维码扫描后开始下载。
 } elseif($action == 'read') {
-
+	
 	// 给出插件的介绍+付款二维码
 	$dir = param_word(2);
 	$siteid = plugin_siteid();
@@ -64,9 +77,14 @@ if($action == 'local') {
 	$islocal = plugin_is_local($dir);
 	
 	$url = '';
-	$download_url = '';
+	//$download_url = '';
+	if(	$plugin['buy']==1){
+		$download_url = url("plugin-download-$dir");
+	}else{
+		cache_delete('plugin_official_list');
+	}
 	$errmsg = '';
-	if($plugin['pluginid']) {
+	if($plugin['pluginid'] && false) {
 		// 判断是否已经购买过。
 		// 如果之前免费，后来收费，则判断是否已经支付。
 		
@@ -386,24 +404,25 @@ function plugin_dependency_arr_to_links($arr) {
 
 // 下载插件、解压
 function plugin_download_unzip($dir) {
-	global $conf;
+	global $conf; 
+	$plugin = plugin_read_by_dir($dir);
 	$app_url = http_url_path();
 	$siteid =  plugin_siteid();
-	$app_url = xn_urlencode($app_url);
-	$url = PLUGIN_OFFICIAL_URL."plugin-download-$dir-$siteid-$app_url.htm"; // $siteid 用来防止别人伪造站点，GET 不够安全，但不是太影响
+	$app_url = xn_urlencode($app_url); 
+	$url = $plugin['zip_url'].'?api_key='.kv_get('iqismart_appkey'); // $siteid 用来防止别人伪造站点，GET 不够安全，但不是太影响
 
 	// 服务端开始下载
 	// set_time_limit(0); // 设置超时
 	$s = http_get($url);
-	empty($s) AND message(-1, $url.lang('plugin_return_data_error').lang('server_response_empty')); 
+	empty($s) AND message(-1, lang('plugin_return_data_error').lang('server_response_empty')); 
 	if(substr($s, 0, 2) != 'PK') {
 		$arr = xn_json_decode($s);
 		
-		empty($arr) AND  message(-1, $url.lang('plugin_return_data_error').$s); 
+		empty($arr) AND  message(-1, lang('plugin_return_data_error').$s); 
 		if($arr['code'] == -2) {
 			message(-2, jump(lang('plugin_is_not_free'), url("plugin-read-$dir")));
 		}
-		message($arr['code'], $url.lang('plugin_return_data_error').$arr['message']);  //lang('server_response_error').':'
+		message($arr['code'], lang('plugin_return_data_error').$arr['message']);  //lang('server_response_error').':'
 	}
 	//$arr = xn_json_decode($s);
 	//empty($arr['message']) AND message(-1, '服务端返回数据错误：'.$s);
@@ -442,7 +461,7 @@ function plugin_is_bought($dir) {
 	$url = PLUGIN_OFFICIAL_URL."plugin-is_bought-$dir-$siteid-$app_url.htm"; // $siteid 用来防止别人伪造站点，GET 不够安全，但不是太影响
 	$s = http_get($url);
 	$arr = xn_json_decode($s);
-	empty($arr) AND  message(-1, $url.lang('plugin_return_data_error').$s); 
+	empty($arr) AND  message(-1, lang('plugin_return_data_error').$s); 
 	if($arr['code'] == 0) {
 		return TRUE;
 	} else {
@@ -465,12 +484,12 @@ function plugin_order_buy_qrcode_url($siteid, $dir, $app_url = '') {
 	if(empty($s)) return xn_error(-1, lang('server_response_empty')); 
 	$arr = xn_json_decode($s);
 	if(empty($arr) || !isset($arr['code'])) {
-		return xn_error($arr['code'], $url.lang('plugin_return_data_error').$s);
+		return xn_error($arr['code'], lang('plugin_return_data_error').$s);
 	}
 	if($arr['code'] == 0) {
 		return $arr['message'];
 	} else {
-		return xn_error($arr['code'], $url.lang('plugin_return_data_error').$arr['message']);
+		return xn_error($arr['code'], lang('plugin_return_data_error').$arr['message']);
 	}
 }
 
