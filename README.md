@@ -2,7 +2,10 @@
 Xiuno PRO 是在消逝的官方git版本基础上，兼容php8；jquery、bootstrap版本升级。移除全部插件上线一起smart插件中心；修复了若干小bug。
 
 ## 下载安装
-官方下载：[xiuno.pro](http://xiuno.pro)
+- 环境：php5.x-8.x、mysql5.x-8.x
+- 下载：[发布页](https://github.com/iqismart/xiuno-pro/releases)
+- 安装：上传到网站根目录，访问首页即可进入安装
+
 
 ## 我做了些什么
 
