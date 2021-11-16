@@ -167,7 +167,7 @@ return array(
 	'plugin_detail'=>'Plugin Detail',
 	'plugin_brief_url'=>'Plugin Brief URL',
 	'plugin_not_exists'=>'Plugin does not exists',
-	'plugin_versio_not_match'=>'This plugin is dependent on Xiuno BBS Minimum version {bbs_version}, current version：{version}',
+	'plugin_versio_not_match'=>'This plugin is dependent on Xiuno PRO Minimum version {bbs_version}, current version：{version}',
 	'plugin_download_sucessfully'=>'Download plugin ({dir}) sucessfully, please click to install',
 	'plugin_install_sucessfully'=>'Install Plugin ( {name} ) sucessfully',
 	'plugin_unstall_sucessfully'=>'Unstall Plugin ( {name} ) sucessfully, to completely remove the plugin, please manually delete the {dir} directory',

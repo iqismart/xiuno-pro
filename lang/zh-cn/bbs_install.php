@@ -39,8 +39,8 @@ return array(
 	'admin_username' => '管理员用户名',
 	'admin_pw' => '管理员密码',
 	'installing_about_moment' => '正在安装，大概需要一分钟左右',
-	'license_title' => 'Xiuno BBS 专业版 授权协议',
-	'license_content' => '感谢您选择 Xiuno BBS 专业版，它是在消逝的官方版本基础上的优化。
+	'license_title' => 'Xiuno PRO 专业版 授权协议',
+	'license_content' => '感谢您选择 Xiuno PRO 专业版，它是在消逝的官方版本基础上的优化。
 	
 	Xiuno PRO 是一款国产、小巧、稳定、支持在大数据量下仍然保持高负载能力的轻论坛。它只有 20 多个表，源代码压缩后 1M 左右，运行速度非常快，处理单次请求在 0.01 秒级别，在有 APC、Yac、XCache 的环境下可以跑到 0.00x 秒，对第三方类库依赖极少，仅仅前端依赖 jquery.js，作者认为它就像一辆纯手工打造的法拉利，动力强劲，没有一丝赘肉，方便部署和维护，是一个非常好的二次开发的基石。
 	
