@@ -63,8 +63,8 @@ location ~* \.(htm)$ {
 离线安装：[一起smart插件中心：](https://www.iqismart.net/forum-4.htm)
 
 ## 下一步
-  
-- [ ] 丰富插件中心，上架更多插件。 
+- [ ] xiuno核心：增加手机号登录、企业支付等。 
+- [ ] 插件：丰富插件中心，上架更多插件。 
 
 ## 贡献者
 创始人：axiuno
