@@ -39,7 +39,7 @@ return array(
 	'admin_username' => 'Логин',
 	'admin_pw' => 'Пароль',
 	'installing_about_moment' => 'Установка, ожидайте...',
-	'license_title' => 'Xiuno BBS 4.0 Лицензионное соглашение',
+	'license_title' => 'Xiuno PRO Лицензионное соглашение',
 	'license_content' => 'Thank you to choose BBS Xiuno 4, it is a domestic, compact, stable, support in the large amount of data is still maintained a high load capacity of light forum. It is only more than 20 table, 1M compression source code about running very fast, processing a single request in 0.01 second level, in APC, Xcache, Yac environment can ran to the 0.00x seconds, to third-party library, very few dependencies, the front only dependent jquery.js, as thought it is just like a car handmade Ferrari, the power is strong, without the slightest throatiness, convenient deployment and maintenance is the cornerstone of a very good secondary development.
 Xiuno BBS (bulletin board system) 4.0 using bootstrap 4 + jQuery 3 as a front-end library, full support for mobile browser; the back-end XiunoPHP 4.0 support NoSQL way to operate a variety of databases, this version is a great leap forward.
 Xiuno pronunciation "Shura", English Shura, which is one of the six Buddhist "Shura", in between humanity and heaven.
@@ -47,7 +47,7 @@ BBS Xiuno 4 using the MIT agreement, you can freely modify, derived version, com
 	',
 	'license_date' => 'Дата выпуска: Jan 22, 2018',
 	'agree_license_to_continue' => 'Принять лицензию и продолжить',
-	'install_title' => 'Xiuno BBS 4.0 Мастер установки',
+	'install_title' => 'Xiuno PRO Мастер установки',
 	'install_guide' => 'Мастер установки',
 
 	

@@ -12,7 +12,7 @@ $uid = 1;	// 用户 id
 $gid = 1;	// 用户组 id; 1: 管理员; 101:普通用户
 
 for($i=1; $i<10; $i++) {
-	$subject = '欢迎使用 Xiuno BBS 4.0 新一代论坛系统。'.$i;
+	$subject = '欢迎使用 Xiuno PRO 新一代论坛系统。'.$i;
 	$message = '祝您使用愉快！';
 	$thread = array(
 		'fid'=>$fid,

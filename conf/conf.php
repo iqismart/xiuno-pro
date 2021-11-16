@@ -77,7 +77,7 @@ return array (
   'logo_mobile_url' => 'view/img/logo.png',
   'logo_pc_url' => 'view/img/logo.png',
   'logo_water_url' => 'view/img/water-small.png',
-  'sitename' => 'Xiuno BBS',
+  'sitename' => 'Xiuno PRO',
   'sitebrief' => 'Site Brief',
   'timezone' => 'Asia/Shanghai',
   'lang' => 'zh-cn',

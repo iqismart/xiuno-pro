@@ -28,6 +28,15 @@ if($action == 'local') {
 	
 	include _include(ADMIN_PATH."view/htm/plugin_list.htm");
 
+}elseif($action == 'checkVersion') { 
+	header('Content-Type:application/json; charset=utf-8');
+	$iqisamrt_version = get_iqismart_version();
+
+	if(version_compare($conf['version'],$iqisamrt_version['version'],'<')){
+		$iqisamrt_version['new'] = true;
+	}
+	exit(json_encode($iqisamrt_version));   
+	
 } elseif($action == 'official_fee' || $action == 'official_free') {
 
 	$cateid = param(2, 0);

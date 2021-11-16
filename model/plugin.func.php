@@ -426,6 +426,17 @@ function get_iqismart_userinfo(){
 
 }
 
+function get_iqismart_version(){
+	$url = PLUGIN_OFFICIAL_URL."plugin-version.htm?api_key=".kv_get('iqismart_appkey');   
+	$s = http_get($url); 
+	// 检查返回值是否正确
+	if(!empty($s)) { 
+		$iqismart_version = xn_json_decode($s); 
+		return $iqismart_version;
+	} 
+
+}
+
 function plugin_official_list_cache() {
 	$s = DEBUG == 3 ? NULL : cache_get('plugin_official_list');
 	if($s === NULL) {

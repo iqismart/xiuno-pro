@@ -2,7 +2,7 @@
 
 /*
 
-	Xiuno BBS 4.0 配置文件
+	Xiuno PRO 配置文件
 	支持多台 DB，主从配置好以后，xn 会自动根据 SQL 读写分离。
 	支持各种 cache，本机 apc/xcache, 网络: redis/memcached/mysql
 	支持 CDN，如果前端开启了 CDN 请设置 cdn_on=>1, 否则获取 IP 会不准确 
@@ -65,7 +65,7 @@ return array (
 	'tmp_path' => './tmp/',		// 可以配置为 linux 下的 /dev/shm ，通过内存缓存临时文件
 	'log_path' => './log/',		// 日志目录
 	
-	// -------------------> xiuno bbs 4.0 配置
+	// -------------------> xiuno pro 配置
 
 	'view_url' => 'view/',		// 可以配置单独的 CDN 域名：比如：http://static.domain.com/view/
 	'upload_url' => 'upload/',	// 可以配置单独的 CDN 域名：比如：http://upload.domain.com/upload/

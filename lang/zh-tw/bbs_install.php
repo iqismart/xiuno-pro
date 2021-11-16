@@ -39,17 +39,17 @@ return array(
 	'admin_username' => '管理員用戶名',
 	'admin_pw' => '管理員密碼',
 	'installing_about_moment' => '正在安裝，大概需要壹分鐘左右',
-	'license_title' => 'Xiuno BBS 4.0 中文版授權協議',
-	'license_content' => '感謝您選擇 Xiuno BBS 4.0，它是壹款國產、小巧、穩定、支持在大數據量下仍然保持高負載能力的輕型論壇。它只有 20 多個表，源代碼壓縮後 1M 左右，運行速度非常快，處理單次請求在 0.01 秒級別，在有 APC、XCache、Yac 的環境下可以跑到 0.00x 秒，對第三方類庫依賴極少，僅僅前端依賴 jquery.js，作者認為它就像壹輛純手工打造的法拉利，動力強勁，沒有壹絲贅肉，方便部署和維護，是壹個非常好的二次開發的基石。
+	'license_title' => 'Xiuno PRO 中文版授權協議',
+	'license_content' => '感謝您選擇 Xiuno PRO，它是壹款國產、小巧、穩定、支持在大數據量下仍然保持高負載能力的輕型論壇。它只有 20 多個表，源代碼壓縮後 1M 左右，運行速度非常快，處理單次請求在 0.01 秒級別，在有 APC、XCache、Yac 的環境下可以跑到 0.00x 秒，對第三方類庫依賴極少，僅僅前端依賴 jquery.js，作者認為它就像壹輛純手工打造的法拉利，動力強勁，沒有壹絲贅肉，方便部署和維護，是壹個非常好的二次開發的基石。
 	
-Xiuno BBS 4.0 采用 Bootstrap 4 + JQuery 3 作為前端類庫，全面支持移動端瀏覽器；後端 XiunoPHP 4.0 支持了 NoSQL 的方式操作各種數據庫，這個版本是壹個巨大的飛躍。
+Xiuno PRO 采用 Bootstrap 4 + JQuery 3 作為前端類庫，全面支持移動端瀏覽器；後端 XiunoPHP 4.0 支持了 NoSQL 的方式操作各種數據庫，這個版本是壹個巨大的飛躍。
 	
 Xiuno 發音“修羅”，英文為 Shura，在佛教裏面為六道之壹"修羅道"，處於人道和天道之間。
 
-Xiuno BBS 4.0 采用 MIT 協議發布，您可以自由修改、派生版本、商用而不用擔心任何法律風險（修改後應保留原來的版權信息）。',
+Xiuno PRO 采用 MIT 協議發布，您可以自由修改、派生版本、商用而不用擔心任何法律風險（修改後應保留原來的版權信息）。',
 	'license_date' => '發布時間：2016年7月26日',
 	'agree_license_to_continue' => '同意協議繼續安裝',
-	'install_title' => 'Xiuno BBS 4.0 安裝向導',
+	'install_title' => 'Xiuno PRO 安裝向導',
 	'install_guide' => '安裝向導',
 
 	'function_check' => '函數依賴檢查',

@@ -25,7 +25,7 @@ include INSTALL_PATH.'install.func.php';
 
 $action = param('action');
 
-if(file_exists(APP_PATH.'conf/conf.php')) message(0,'请先删除conf/conf.php再重新安装') and exit();
+if(file_exists(APP_PATH.'conf/conf.php')) message(0,"<span style='color:rgba(203, 52, 52, 0.85)'>您需要删除conf/conf.php才能重新安装</span>") and exit();
 
 // 安装初始化检测,放这里
 is_file(APP_PATH.'conf/conf.php') AND DEBUG != 2 AND message(0, jump(lang('installed_tips'), '../'));

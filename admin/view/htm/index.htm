@@ -50,15 +50,35 @@
 			</div>
 		</div>
 		
+		<div class="card">
+			<div class="card-body">
+				<h5>版本信息</h5>
+				<div>当前版本: <?php echo $conf['version']?> <a href="javascript:checkVersion('<?php echo $conf['version']?>')">检查更新</a> </div> 
+			</div>
+		</div>
+		<script>
+			function checkVersion(currVersion){
+				console.log(currVersion)
+				$.get(xn.url('plugin-checkVersion'),function(res){
+					console.log(res)
+					if(res.new){
+						$.alert('发现新版本:'+res.version+', <a href="'+xn.url('plugin-updateVersion')+'">在线升级</a>');
+					}else{
+						$.alert('已是最新版本:'+res.version);
+					}
+				});
+			}
+		</script>
+
 		<!--{hook admin_index_team_before.htm}-->
 		
 		<div class="card">
 			<div class="card-body">
 				<h5><?php echo lang('dev_team_info');?></h5>
-				<div>Official Site: <a href="http://www.xiuno.com" target="_blank">http://www.xiuno.com/</a></div>
-				<div>GitHub: <a href="https://github.com/jiix/xiunobbs" target="_blank">https://github.com/jiix/xiunobbs</a></div>
+				<div>Official Site: <a href="http://xiuno.pro" target="_blank">http://xiuno.pro/</a></div>
+				<div>GitHub: <a href="https://github.com/iqismart/xiuno-pro" target="_blank">https://github.com/iqismart/xiuno-pro</a></div>
 				<div>Dev Team:  
-					<a href="http://bbs.xiuno.com/" target="_blank">axiuno</a>
+					<a href="http://www.iqismart.net/" target="_blank">一起smart</a>
 				</div>
 				<div>Thanks For: 
 					<a href="http://www.discuz.net/" target="_blank">cnteacher@discuz</a>
@@ -75,6 +95,7 @@
 		</div>
 		
 		<!--{hook admin_index_team_after.htm}-->
+ 
 		
 	</div>
 </div>
