@@ -44,6 +44,8 @@ if($action == 'login') {
 	// hook admin_index_logout_start.php
 	
 	admin_token_clean();
+
+	session_destroy();
 	
 	message(0, jump(lang('logout_successfully'), './'));
 

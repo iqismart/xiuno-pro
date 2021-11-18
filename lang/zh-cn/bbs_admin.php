@@ -164,7 +164,7 @@ return array(
 	'pugin_cate_2'=>'小型插件',
 	'pugin_cate_3'=>'大型插件',
 	'pugin_cate_4'=>'接口整合',
-	'pugin_cate_99'=>'未分类',
+	'pugin_cate_99'=>'其他',
 	'plugin_detail'=>'插件详情',
 	'plugin_brief_url'=>'插件介绍网址',
 	'plugin_not_exists'=>'插件不存在',

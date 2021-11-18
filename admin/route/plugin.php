@@ -6,6 +6,20 @@ include XIUNOPHP_PATH.'xn_zip.func.php';
 
 $action = param(1);
 
+if($action == 'search'){
+	$keyword = param('keyword');
+	$_SESSION['keyword'] = $keyword;
+	message(0,'');
+	exit();
+}
+if($action == 'hideIqismart'){  
+	$_SESSION['hideIqismart'] = true;
+	message(0,'');
+	exit();
+}
+
+
+
 // 初始化插件变量 / init plugin var
 plugin_init();
 
@@ -101,13 +115,33 @@ if($action == 'local') {
 			message(0, jump('恭喜，升级完成！', url('/'),100)); 
 		}
 	} 
-} elseif($action == 'official_fee' || $action == 'official_free') {
+} elseif($action == 'official_fee' || $action == 'official_free'  || $action == 'official_cert' || $action == 'official_new' || $action == 'official_must' || $action == 'official_rec') {
 
 	$cateid = param(2, 0);
 	$page = param(3, 1);
+	$keyword = xn_urldecode(param(4, ''));
 	$pagesize = 10;
 	$cond = $cateid ? array('cateid'=>$cateid) : array();
 	$cond['price'] = $action == 'official_fee' ? array('>'=>0) : 0;
+	if($keyword){
+		$cond['name'] = array('LIKE'=>$keyword);
+		//$cond['brief'] = array('LIKE'=>$keyword);
+	}
+	if($action == 'official_fee'){
+		$cond['price'] = array('>'=>0);
+	}
+	if($action == 'official_cert'){
+		$cond['is_cert'] = "1";
+	}
+	if($action == 'official_new'){
+		$cond['is_new'] = "1";
+	}
+	if($action == 'official_must'){
+		$cond['is_must'] = "1";
+	}
+	if($action == 'official_rec'){
+		$cond['is_rec'] = "1";
+	}
 			
 	// plugin category
 	$pugin_cates = array(0=>lang('pugin_cate_0'), 1=>lang('pugin_cate_1'), 2=>lang('pugin_cate_2'), 3=>lang('pugin_cate_3'), 4=>lang('pugin_cate_4'), 99=>lang('pugin_cate_99'));
@@ -117,7 +151,7 @@ if($action == 'local') {
 	// official plugin
 	$total = plugin_official_total($cond);
 	$pluginlist = plugin_official_list($cond, array('pluginid'=>-1), $page, $pagesize);
-	$pagination = pagination(url("plugin-$action-$cateid-{page}"), $total, $page, $pagesize);
+	$pagination = pagination(url("plugin-$action-$cateid-{page}-".xn_urlencode($keyword)), $total, $page, $pagesize);
 	
 	$header['title']    = lang('official_plugin');
 	$header['mobile_title'] = lang('official_plugin');

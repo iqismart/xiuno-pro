@@ -407,7 +407,7 @@ function plugin_official_total($cond = array()) {
 
 // 远程插件列表，从官方服务器获取插件列表，全部缓存到本地，定期更新
 function plugin_official_list($cond = array(), $orderby = array('pluginid'=>-1), $page = 1, $pagesize = 20) {
-	global $official_plugins;
+	global $official_plugins; 
 	// 服务端插件信息，缓存起来
 	$offlist = $official_plugins;
 	$offlist = arrlist_cond_orderby($offlist, $cond, $orderby, $page, $pagesize);
@@ -440,14 +440,15 @@ function get_iqismart_version(){
 function plugin_official_list_cache() {
 	$s = DEBUG == 3 ? NULL : cache_get('plugin_official_list');
 	if($s === NULL) {
-		$url = PLUGIN_OFFICIAL_URL."plugin-all-4.htm?api_key=".kv_get('iqismart_appkey'); // 获取所有的插件，匹配到3.0以上的。
+		$url = PLUGIN_OFFICIAL_URL."plugin-all-4-1.htm?api_key=".kv_get('iqismart_appkey'); // 获取所有的插件，匹配到3.0以上的。
 		$s = http_get($url);
 		 
 		// 检查返回值是否正确
 		if(empty($s)) { 
             return xn_error(-1, '从官方获取插件数据失败。');
         }
-		$r = xn_json_decode($s);
+		$r = xn_json_decode(($s));
+		 
 		if(empty($r)) return xn_error(-1, '从官方获取插件数据格式不对。');
 		
 		$s = $r;

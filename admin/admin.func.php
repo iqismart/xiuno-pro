@@ -73,7 +73,12 @@ function admin_tab_active($arr, $active) {
 	// hook admin_tab_active_start.php
 	$s = '';
 	foreach ($arr as $k=>$v) {
-		$s .= '<a role="button" class="btn btn-secondary'.($active == $k ? ' active' : '').'" href="'.$v['url'].'">'.$v['text'].'</a>';
+		if($v['icon']){
+			$s .= '<a role="button" class="btn btn-secondary '.($active == $k ? ' active' : '').'" href="'.$v['url'].'">'.$v['text'].'</a>';
+		}else{
+			$s .= '<a role="button" class="btn btn-secondary'.($active == $k ? ' active' : '').'" href="'.$v['url'].'">'.$v['text'].'</a>';
+		}
+		
 	}
 	// hook admin_tab_active_end.php
 	return $s;

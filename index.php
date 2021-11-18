@@ -20,7 +20,7 @@ $conf = (@include APP_PATH.'conf/conf.php') OR exit('<script>window.location="in
 !isset($conf['logo_mobile_url']) AND $conf['logo_mobile_url'] = 'view/img/logo.png';
 !isset($conf['logo_pc_url']) AND $conf['logo_pc_url'] = 'view/img/logo.png';
 !isset($conf['logo_water_url']) AND $conf['logo_water_url'] = 'view/img/water-small.png';
-$conf['version'] = '4.1.0';		// 定义版本号！避免手工修改 conf/conf.php
+$conf['version'] = '4.1.1';		// 定义版本号！避免手工修改 conf/conf.php
 
 // 转换为绝对路径，防止被包含时出错。
 substr($conf['log_path'], 0, 2) == './' AND $conf['log_path'] = APP_PATH.$conf['log_path']; 

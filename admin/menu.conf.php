@@ -49,8 +49,13 @@ return array(
 		'icon'=>'icon-cogs',
 		'tab'=> array (
 			'local'=>array('url'=>url('plugin-local'), 'text'=>lang('admin_plugin_local_list')),
-			'official_free'=>array('url'=>url('plugin-official_free'), 'text'=>'免费插件'),
-			'official_fee'=>array('url'=>url('plugin-official_fee'), 'text'=>'收费插件'),
+			'official_free'=>array('url'=>url('plugin-official_free'), 'text'=>'免费'),
+			'official_fee'=>array('url'=>url('plugin-official_fee'), 'text'=>'收费'),
+			'official_rec'=>array('url'=>url('plugin-official_rec'), 'text'=>'推荐'),
+			'official_must'=>array('url'=>url('plugin-official_must'), 'text'=>'必备'),
+			'official_cert'=>array('url'=>url('plugin-official_cert'), 'text'=>'认证'),
+			'official_new'=>array('url'=>url('plugin-official_new'), 'text'=>'新品'),
+			
 		)
 	)
 );

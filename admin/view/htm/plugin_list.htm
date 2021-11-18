@@ -3,18 +3,18 @@
 <div class="row">
     <div class="col-12">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="btn-group mb-3" role="group">
                     <?php echo admin_tab_active($menu['plugin']['tab'], $action);?>
                 </div>
             </div>
-            <div class="col-md-8 text-right">
+            <div class="col-md-6 text-right">
                 <div class="btn-group mb-3" role="group">
                     <?php echo $pugin_cate_html;?>
                 </div>
             </div>
         </div>
-        <?php if($action == 'official_fee' || $action == 'official_free'){?>
+        <?php if($action != 'local' && empty($_SESSION['hideIqismart'])){?>
 			<?php
 					$sitename = urlencode($conf['sitename']); 
 					$sitedomain = urlencode($_SERVER['HTTP_HOST']); 
@@ -26,6 +26,7 @@
 			
             <div class="alert alert-warning" role="alert">
                 要使用插件中心，请先绑定一起smart账号，<a target="_blank" href="<?php echo $url?>">立即前往绑定</a>
+                <a class="hideIqismart">不再显示</a>
             </div>
             <?php }else{ ?>
             <?php if(!empty($iqismart_userinfo)){ ?>
@@ -38,6 +39,8 @@
 			</svg> ，当前绑定用户
                 <img class='avatar-2' src="<?php echo $iqismart_userinfo['avatar'];?>" />
                 <?php echo $iqismart_userinfo['username'];?>, <a style="color:gray" target="_blank" href="<?php echo $url?>">重新绑定</a>
+
+                <a class="hideIqismart">不再显示</a>
             </div>
             <?php }else{ ?>
             <div class="alert alert-error" role="alert">
@@ -48,9 +51,23 @@
 					fill="#E84335" p-id="7355"></path>
 			</svg> ，如需帮助请访问
                 <a target="_blank" href="//iqismart.net">一起smart</a>
+
+                <a class="hideIqismart">不再显示</a>
             </div>
             <?php } ?>
             <?php } ?>
+            <?php } ?>
+
+            <!-- 搜索 -->
+            <?php if($action == 'official_fee' || $action == 'official_free') {?>
+            <div class="row"> 
+                <div class="col-md-3 mb-3">
+                    <input type="text" id="keyword" placeholder="关键词" value="<?php echo $keyword?>" class="form-control">
+                </div>
+                <div class="col-md-2 mb-3">
+                    <button id="search" class="form-control btn btn-primary">搜索</button>
+                </div>
+            </div>
             <?php } ?>
             <div class="card">
                 <div class="card-body">
@@ -110,17 +127,19 @@
                                     </td>
                                     <td width="250" align="right">
 
-                                        <?php if($action == 'official_fee' && !$plugin['downloaded'] &&  $plugin['buy']==0) { ?>
-                                        <a role="button" class="btn btn-primary btn-sm buy" href="<?php echo url("plugin-read-$dir"); ?>">
-                                            <?php echo lang('buy');?>
-                                        </a>
+                                        <?php if($action != 'local' && $action != 'official_free' && !$plugin['downloaded'] ) { ?>
+                                            <?php if($plugin['price']>0 && $plugin['buy']==0) {?>
+                                            <a role="button" class="btn btn-warning btn-sm buy " style="color:#FFF" href="<?php echo url("plugin-read-$dir"); ?>">
+                                                <?php echo lang('buy');?>
+                                            </a>
+                                            <?php } else {?> 
+                                                <a role="button" class="btn btn-primary btn-sm buy" href="<?php echo url("plugin-read-$dir"); ?>">
+                                                    <?php echo lang('download');?>
+                                                </a>
+                                            <?php } ?>
                                         <?php } ?>
 										
-										<?php if($action == 'official_fee' && !$plugin['downloaded']  && $plugin['buy']==1) { ?>
-                                        <a role="button" class="btn btn-primary btn-sm buy" href="<?php echo url("plugin-read-$dir"); ?>">
-                                            <?php echo lang('download');?>
-                                        </a>
-                                        <?php } ?>
+										 
 
                                         <?php if($action == 'official_free' && !$plugin['downloaded']) { ?>
                                         <a role="button" class="btn btn-primary btn-sm download" href="<?php echo url("plugin-download-$dir"); ?>">
@@ -185,7 +204,40 @@
 </div>
 
 <?php include _include(ADMIN_PATH.'view/htm/footer.inc.htm');?>
-
 <script>
-    $('#nav li.nav-item-plugin').addClass('active');
+    $('#nav li.nav-item-plugin').addClass('active');  
 </script>
+<style type="text/css">
+    .hideIqismart{
+        color:gray !important;
+        margin-left:10px;
+        float:right;
+    }
+</style>
+<?php 
+$cateid = param(2, 0);
+$page = param(3, 1);
+//$search_url = url('plugin-'.$action.'-'.$cateid.'-'.$page);
+echo "<script> var action = '".$action."';</script>";
+echo "<script> var cateid = '".$cateid."';</script>";
+echo "<script> var page = '".$page."';</script>";
+?>
+<?php if($action != 'local') {?>
+<script> 
+    $('#search').click(function(){ 
+        location.href  = xn.url('plugin-'+action+'-'+cateid+'-'+1+'-'+xn.urlencode($('#keyword').val()));
+    });
+    $('#keyword').bind('keyup', function(event) {
+        if (event.keyCode == "13") { 
+            $('#search').click();
+        }
+    });
+    $('.hideIqismart').click(function(){ 
+        if(!window.confirm("确认隐藏吗，如果需要显示请退出重新登录")) return false;
+        $.get(xn.url('plugin-hideIqismart'),function(){
+            $('.hideIqismart').parent().hide();
+        });
+    });
+    
+</script>
+<?php } ?>
