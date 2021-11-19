@@ -16,7 +16,7 @@ Xiuno PRO 是在官方git版本基础上，兼容php8；上线一起smart插件�
 ### 插件中心
 - 💄一起smart插件中心上线
 ![](https://img.iqismart.com/imgs/2021/11/8cbecc2f37ae981e.png)
-
+- 支持搜索
 ![](http://img.iqismart.com/imgs/2021/11/e3982c51738c42b4.png)
 
 ### 一键更新
