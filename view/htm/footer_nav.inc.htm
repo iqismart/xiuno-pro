@@ -3,12 +3,12 @@
         <div class="row">
             <div class="col">
                 <!--{hook footer_footer_left_start.htm}-->
-                Powered by Xiuno PRO
+                <?php echo htmlspecialchars_decode($conf['footer_left_html'])?>
                 <!--{hook footer_footer_left_end.htm}-->
             </div>
             <div class="col text-right">
                 <!--{hook footer_footer_right_start.htm}-->
-                Processed: <b><?php echo substr(microtime(1) - $starttime, 0, 5);?></b>, SQL: <b><?php echo count($db->sqls);?></b>
+                <?php eval($conf['footer_right_html'])?>
                 <!--{hook footer_footer_right_end.htm}-->
             </div>
         </div>

@@ -89,6 +89,15 @@ return array(
 	'pagesize'=>'主题列表每页条数',
 	'postlist_pagesize'=>'回复列表每页条数',
 
+	//iqismart 新增设置
+	'logo_mobile_url'=>'手机的LOGO',
+	'logo_pc_url'=>'PC的LOGO',
+	'footer_left_html'=>'底部左侧',
+	'footer_right_html'=>'底部右侧',
+	'footer_left_html_tips'=>'tops：Support HTML tag, new line use &lt;br&gt;',
+	'footer_right_html_tips'=>'tops：Support HTML tag, new line use &lt;br&gt;',
+
+
 	// 版块
 	'forum_list'=>'版块列表',
 	'forum_id'=>'版块 ID',

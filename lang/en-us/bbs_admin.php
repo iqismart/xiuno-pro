@@ -89,6 +89,12 @@ return array(
 	'pagesize'=>'Topic list Pagesize',
 	'postlist_pagesize'=>'Reply list Pagesize',
 
+	'logo_url'=>'站点logo',
+	'footer_left_html'=>'底部左侧',
+	'footer_right_html'=>'底部右侧',
+	'footer_left_html_tips'=>'tops：Support HTML tag, new line use &lt;br&gt;',
+	'footer_right_html_tips'=>'tops：Support HTML tag, new line use &lt;br&gt;',
+
 	// forum
 	'forum_list'=>'Forum List',
 	'forum_id'=>'Forum ID',

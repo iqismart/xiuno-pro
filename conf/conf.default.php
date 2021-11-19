@@ -112,6 +112,11 @@ return array (
 		3: /thread/create/1   不支持
 	*/
 	'url_rewrite_on' => 0,
+
+	'logo_url'=>'/view/img/logo.png',
+	'footer_left_html'=>'Powered by Xiuno PRO',
+	'footer_right_html'=>'echo "Processed: <b>".substr(microtime(1) - $starttime, 0, 5)."</b>, SQL: <b>".count($db->sqls)."</b>";', 
+
 	
 	// 禁止插件
 	'disabled_plugin' => 0, 

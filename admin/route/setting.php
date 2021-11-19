@@ -29,6 +29,10 @@ if($action == 'base') {
 		$input['pagesize'] = form_text('pagesize', $conf['pagesize'], 100); 
 		$input['postlist_pagesize'] = form_text('postlist_pagesize', $conf['postlist_pagesize'], 100); 
 
+		$input['logo_pc_url'] = form_text('logo_pc_url', $conf['logo_pc_url']);
+		$input['logo_mobile_url'] = form_text('logo_mobile_url', $conf['logo_mobile_url']);
+		$input['footer_left_html'] = form_textarea('footer_left_html', $conf['footer_left_html'], '100%', 100);
+		$input['footer_right_html'] = form_textarea('footer_right_html', $conf['footer_right_html'], '100%', 100);
 		$header['title'] = lang('admin_site_setting');
 		$header['mobile_title'] =lang('admin_site_setting');
 		
@@ -47,7 +51,11 @@ if($action == 'base') {
 		$url_rewrite_on = param('url_rewrite_on', 0); 
 		$cdn_on = param('cdn_on', 0); 
 		$pagesize = param('pagesize', 0); 
-		$postlist_pagesize = param('postlist_pagesize', 0);  		
+		$postlist_pagesize = param('postlist_pagesize', 0); 
+		$logo_mobile_url = param('logo_mobile_url', '',FALSE);  	
+		$logo_pc_url = param('logo_pc_url', '',FALSE);  	
+		$footer_left_html = param('footer_left_html', '',FALSE);  	
+		$footer_right_html = param('footer_right_html', '',FALSE);  	 
 		$_lang = param('lang');
 		
 		// hook admin_setting_base_post_start.php
@@ -63,7 +71,11 @@ if($action == 'base') {
 		$replace['url_rewrite_on'] = $url_rewrite_on;
 		$replace['cdn_on'] = $cdn_on;
 		$replace['pagesize'] = $pagesize;
-		$replace['postlist_pagesize'] = $postlist_pagesize; 		
+		$replace['postlist_pagesize'] = $postlist_pagesize; 	
+		$replace['logo_mobile_url'] = $logo_mobile_url;	
+		$replace['logo_pc_url'] = $logo_pc_url;	
+		$replace['footer_left_html'] = $footer_left_html;	
+		$replace['footer_right_html'] = $footer_right_html;	
 		file_replace_var(APP_PATH.'conf/conf.php', $replace);
 	
 		// hook admin_setting_base_post_end.php
