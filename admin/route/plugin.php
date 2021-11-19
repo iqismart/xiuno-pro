@@ -110,7 +110,7 @@ if($action == 'local') {
 			$sqlpath = APP_PATH.'install/upgrade.sql'; 
 			if(file_exists($sqlpath)){
 				$sql = file_get_contents($sqlpath);
-				if($sql) db_exec($sql);
+				if($sql) try {db_exec($sql);}catch(Exception $e){};
 			} 
 			message(0, jump('恭喜，升级完成！', url('/'),100)); 
 		}
