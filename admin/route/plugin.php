@@ -97,10 +97,13 @@ if($action == 'local') {
 				exit();
 			} 
 			$destpath = APP_PATH;  
-			if(is_dir($srcpath)) {
-                dir_copy($srcpath, $destpath);
-                rmdir_recusive($conf['tmp_path'].'xiuno-pro-'.$iqisamrt_version['version'], 0);
-            }
+			try {
+				if(is_dir($srcpath)) {
+					dir_copy($srcpath, $destpath);
+					rmdir_recusive($conf['tmp_path'].'xiuno-pro-'.$iqisamrt_version['version'], 0);
+				}
+			}catch(Exception $e){ 
+			}
 			message(0, jump('点击进行下一步：升级数据库', url('plugin-updateVersion-4'),100000)); 
 		}
 	} 
