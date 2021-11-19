@@ -68,10 +68,4 @@ location ~* \.(htm)$ {
 ## 下一步
 - [ ] xiuno核心：增加手机号登录、企业支付等。 
 - [ ] 插件：丰富插件中心，上架更多插件。 
-
-## 贡献者
-创始人：axiuno
-
-感谢：cnteacher@discuz、Discuz!、Team Artery、剑心@wooyun、右键森林、吴兆焕、杨永全、郑城、大象、燃烧的冰、⭐Star本项目的您。
-
-## Enjoy!
+ 
