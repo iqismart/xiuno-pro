@@ -18,7 +18,11 @@ Xiuno PRO 是在官方git版本基础上，兼容php8；上线一起smart插件�
 
 ### 一键更新
 一键检查更新，在线升级
-在后台首页
+
+在后台首页:
+
+![图片](//img.iqismart.com/imgs/2021/11/5329476997e54487.png)
+
 注意：除/conf/conf.php、/upload、/plugin目录外都将被覆盖，请谨慎操作
 
 ### 其他优化
