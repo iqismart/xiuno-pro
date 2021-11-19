@@ -71,13 +71,13 @@ if($action == 'local') {
 			empty($s) AND message(-1, lang('plugin_return_data_error').lang('server_response_empty'));  
 			$zipfile = $conf['tmp_path'].'xiuno-pro-'.$iqisamrt_version['version'].'.zip';  
 			file_put_contents($zipfile, $s); 
-			message(0, jump('点击进行下一步：文件比较', url('plugin-updateVersion-2'),100000));
+			message(0, jump('点击进行下一步：文件比较', url('plugin-updateVersion-2'),0));
 		}
 	}
 
 	//第二步 比较文件
     if ($step==2) {
-		message(0, jump('点击进行下一步：覆盖文件（除/conf/conf.php、/upload、/plugin目录外都将被覆盖，请谨慎操作）', url('plugin-updateVersion-3'),0)); 
+		message(0, jump('点击进行下一步：覆盖文件（除/conf/conf.php、/upload、/plugin目录外都将被覆盖，请谨慎操作）', url('plugin-updateVersion-3'),1000000)); 
     }
 
 	//第3部 确认更新
@@ -101,6 +101,9 @@ if($action == 'local') {
 				$sql = file_get_contents($sqlpath);
 				if($sql) try {db_exec($sql);}catch(Exception $e){};
 			} 
+			cache_truncate();
+			$runtime = NULL; // 清空
+			rmdir_recusive($conf['tmp_path'], 1);
 			message(0, jump('恭喜，升级完成！', url('/'),100)); 
 		}
 	} 
