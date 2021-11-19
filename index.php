@@ -17,8 +17,8 @@ $conf = (@include APP_PATH.'conf/conf.php') OR exit('<script>window.location="in
 
 // 兼容 4.0.3 的配置文件	
 !isset($conf['user_create_on']) AND $conf['user_create_on'] = 1;
-!isset($conf['logo_mobile_url']) AND $conf['logo_mobile_url'] = 'view/img/logo.png';
-!isset($conf['logo_pc_url']) AND $conf['logo_pc_url'] = 'view/img/logo.png';
+!isset($conf['logo_mobile_url']) AND $conf['logo_mobile_url'] = '/view/img/logo.png';
+!isset($conf['logo_pc_url']) AND $conf['logo_pc_url'] = '/view/img/logo.png';
 !isset($conf['logo_water_url']) AND $conf['logo_water_url'] = 'view/img/water-small.png';
 $conf['version'] = '4.1.1';		// 定义版本号！避免手工修改 conf/conf.php
 

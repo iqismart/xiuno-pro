@@ -71,8 +71,8 @@ return array (
 	'upload_url' => 'upload/',	// 可以配置单独的 CDN 域名：比如：http://upload.domain.com/upload/
 	'upload_path' => './upload/',	// 物理路径，可以用 NFS 存入到单独的文件服务器
 	
-	'logo_mobile_url' => 'view/img/logo.png',		// 手机的 LOGO URL
-	'logo_pc_url' => 'view/img/logo.png',			// PC 的 LOGO URL
+	'logo_mobile_url' => '/view/img/logo.png',		// 手机的 LOGO URL
+	'logo_pc_url' => '/view/img/logo.png',			// PC 的 LOGO URL
 	'logo_water_url' => 'view/img/water-small.png',		// 水印的 LOGO URL
 	
 	'sitename' => 'Xiuno PRO',
@@ -112,8 +112,7 @@ return array (
 		3: /thread/create/1   不支持
 	*/
 	'url_rewrite_on' => 0,
-
-	'logo_url'=>'/view/img/logo.png',
+ 
 	'footer_left_html'=>'Powered by Xiuno PRO',
 	'footer_right_html'=>'echo "Processed: <b>".substr(microtime(1) - $starttime, 0, 5)."</b>, SQL: <b>".count($db->sqls)."</b>";', 
 

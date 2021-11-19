@@ -91,7 +91,7 @@ return array(
 
 	//iqismart 新增设置
 	'logo_mobile_url'=>'手机的LOGO',
-	'logo_pc_url'=>'PC的LOGO',
+	'logo_pc_url'=>'站点LOGO',
 	'footer_left_html'=>'底部左侧',
 	'footer_right_html'=>'底部右侧',
 	'footer_left_html_tips'=>'tops：Support HTML tag, new line use &lt;br&gt;',
