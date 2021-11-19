@@ -83,18 +83,11 @@ if($action == 'local') {
 	//第3部 确认更新
 	if($step==3){
 		if(version_compare($conf['version'],$iqisamrt_version['version'],'<')){ 
-			$srcpath = APP_PATH.'tmp/xiuno-pro-'.$iqisamrt_version['version']; 
-			if(!is_dir($srcpath)){
-				echo '$srcpath='.$srcpath;
-				header('Location:'.url('plugin-updateVersion-1'));
-				exit();
-			} 
+			$zipfile = $conf['tmp_path'].'xiuno-pro-'.$iqisamrt_version['version'].'.zip';  
 			$destpath = APP_PATH;  
 			try {
-				if(is_dir($srcpath)) {
-					dir_copy($srcpath, $destpath);
-					rmdir_recusive($conf['tmp_path'].'xiuno-pro-'.$iqisamrt_version['version'], 0);
-				}
+				xn_unzip($zipfile, $destpath);
+				unlink($zipfile);
 			}catch(Exception $e){ 
 			}
 			message(0, jump('点击进行下一步：升级数据库', url('plugin-updateVersion-4'),100000)); 
