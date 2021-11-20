@@ -177,7 +177,7 @@ if($action == 'local') {
 	
 	$url = '';
 	//$download_url = '';
-	if(	$plugin['buy']==1){
+	if($plugin['price']==0 || $plugin['buy']==1){
 		$download_url = url("plugin-download-$dir");
 	}else{
 		cache_delete('plugin_official_list');
