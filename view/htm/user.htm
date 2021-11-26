@@ -3,7 +3,9 @@
 		<div class="row line-height-4">
 			<div class="col-md-2 col-sm-12 text-center">
 				<img class="logo-4" src="<?php echo $_user['avatar_url'];?>">
-				<br><b><?php echo $_user['username'];?> </b>
+				<br><b><?php echo $_user['username'];?> 
+				<!--{hook user_profile_username_b_after.htm}-->
+				</b>
 				<!--{hook user_profile_username_after.htm}-->
 			</div>
 			<div class="col-4 col-sm-5">
